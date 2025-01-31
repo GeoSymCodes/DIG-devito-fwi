@@ -26,21 +26,29 @@ The following notebooks are provided:
 - :orange_book: ``acoustic/Modelling_filtering.ipynb``: notebook comparing modelling with a filtered wavelet and filtering of original data computed with unfiltered wavelet;
 - :orange_book: ``acoustic/Gradient_comparison.ipynb``: notebook comparing gradients from different objective functions;
 - :orange_book: ``acoustic/Gradient_decoupled.ipynb``: notebook comparing gradient computations with mixed computational graphs including a Torch Module (useful to embed NNs in FWI);
+- :orange_book: ``acoustic/Data_visualization.ipynb``: notebook showcasing different visualization routines;
+- :orange_book: ``acoustic/Acoustic_RTM.ipynb``: notebook performing acoustic RTM;
 - :orange_book: ``acoustic/AcousticVel_L2_1stage.ipynb``: notebook performing acoustic FWI parametrized in velocity with entire data;
+- :orange_book: ``acoustic/AcousticVel_L2snap_1stage.ipynb``: notebook performing acoustic FWI parametrized in velocity with entire data and wavefield snap-shotting for the imaging condition;
 - :orange_book: ``acoustic/AcousticVel_L2_1stagewrapper.ipynb``: notebook performing acoustic FWI parametrized in velocity with entire data using AcousticFWI wrapper;
 - :orange_book: ``acoustic/AcousticVel_L2torch_1stage.ipynb``: notebook performing acoustic FWI parametrized in velocity with entire data using Torch AD-based objective function;
 - :orange_book: ``acoustic/AcousticVel_L2adam_1stage.ipynb``: notebook performing acoustic FWI parametrized in velocity with entire data wrapping wave engine in a Torch AD-based graph and using Adam solver;
 - :orange_book: ``acoustic/AcousticVel_L2refr_1stage.ipynb``: notebook performing acoustic FWI parametrized in velocity with only refracted waves;
+- :orange_book: ``acoustic/AcousticVel_L2smooth_1stage.ipynb``: notebook performing acoustic FWI parametrized in velocity with noisy data and Laplacian regularizer;
 - :orange_book: ``acoustic/AcousticVel_XCorrrefr_1stagewrapper.ipynb``: notebook performing acoustic FWI parametrized in velocity with only refracted waves using XCorr objective function and AcousticFWI wrapper;
 - :orange_book: ``acoustic/AcousticVel_L2_Nstages.ipynb``: notebook performing acoustic FWI parametrized in velocity with entire data in N frequency stages;
 - :orange_book: ``acoustic/AcousticVel_L2_Nstageswrapper.ipynb``: notebook performing acoustic FWI parametrized in velocity with entire data in N frequency stages using AcousticFWI wrapper;
 - :orange_book: ``acoustic/AcousticVel_L2refr_Nstages.ipynb``: notebook performing acoustic FWI parametrized in velocity with only refracted waves in N frequency stages.
 
-
 ## Scripts
 The following scripts are also provided:
+
+- :orange_book: ``acoustic/Gradient_full.ipynb``: notebook computing a single gradient with entire wavefield;
+- :orange_book: ``acoustic/Gradient_snap.ipynb``: notebook computing a single gradient with wavefield snap-shotting (used together with `Gradient_full` to assess memory footprint reduction in case of snap-shotting);
 - :orange_book: ``acoustic/Gradient_comparison_mpi.ipynb``: notebook computing gradients distributed across sources;
 - :orange_book: ``acoustic/AcousticVel_L2_1stage.ipynb``: notebook performing acoustic FWI parametrized in velocity distributed across sources;
+- :orange_book: ``acoustic/AcousticVel_L2graddescent_1stage.py``: notebook performing acoustic FWI parametrized in velocity distributed across sources with gradient descent algorithm;
+- :orange_book: ``acoustic/AcousticVel_L2PDTV_1stage.ipynb``: notebook performing acoustic FWI parametrized in velocity distributed across source with primal-dual  algorithm and isotropic total-variation regularization.
 
 
 ## Getting started :space_invader: :robot:

@@ -1,32 +1,58 @@
-__all__ = ["create_mask",
-           "PostProcessVP",
-           ]
+__all__ = [
+    "create_mask",
+    "PostProcessVP",
+]
 
 import numpy as np
 from scipy.ndimage import gaussian_filter
 
 
-def create_mask(m, value):
-    """Mask
+def create_mask_value(m, value):
+    """Value-based mask
 
     Create mask based on cut-off ``value``. When the mask is applied
     to a vector, this removes all values before such cut-off.
 
     Parameters
     ----------
-    m : :obj:`float`
+    m : :obj:`numpy.ndarray`
         Model
     value : :obj:`float`
         Cut-off value
 
     Returns
     -------
-    mask : :obj:`float`
+    mask : :obj:`numpy.ndarray`
         Mask
 
     """
     mask = m > value
     mask = mask.astype(int)
+    return mask
+
+
+def create_mask_depth(m, depth):
+    """Depth-based mask
+
+    Create mask based on ``depth``. When the mask is applied
+    to a vector, this removes all values above a predefined
+    depth index.
+
+    Parameters
+    ----------
+    m : :obj:`numpy.ndarray`
+        Model
+    depth : :obj:`int`
+        Depth index
+
+    Returns
+    -------
+    mask : :obj:`numpy.ndarray`
+        Mask
+
+    """
+    mask = np.ones_like(m)
+    mask[:, :depth] = 0
     return mask
 
 
@@ -48,7 +74,7 @@ class PostProcessVP():
         Scaling to apply to loss and gradient
     sigmas : :obj:`tuple`, optional
         Sigmas of gaussian smoothing to apply to gradient
-    mask : :obj:`float`, optional
+    mask : :obj:`numpy.ndarray`, optional
         Mask of size ``(nx, nz)`` to apply to gradient
 
     """
@@ -80,13 +106,13 @@ class PostProcessVP():
         # Scale to obtain velocity gradient
         grad = - grad / (vp ** 3)
 
-        # Mask gradient
-        if self.mask is not None:
-            grad *= self.mask
-
         # Smooth gradient
         if self.sigmas is not None:
             grad = gaussian_filter(grad, sigma=self.sigmas)
+        
+        # Mask gradient
+        if self.mask is not None:
+            grad *= self.mask
 
         # Rescale loss and gradient
         loss /= self.scaling
