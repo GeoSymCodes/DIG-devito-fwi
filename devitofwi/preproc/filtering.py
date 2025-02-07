@@ -43,11 +43,11 @@ def filter_data(nfilt, fmin, fmax, dt, inp, plotflag=False):
     nfilt : :obj:`int`
         Size of filter
     fmin : :obj:`float`
-        Minimum frequency
+        Minimum frequency in Hz
     fmax : :obj:`float`
-        Maximum frequency
+        Maximum frequency in Hz
     dt : :obj:`float`
-        Time sampling
+        Time sampling in s
     inp : :obj:`numpy.ndarray`
         Data of size `nx x nt`
 
@@ -78,11 +78,11 @@ class Filter():
     Parameters
     ----------
     freqs : :obj:`list`
-        Cut-off frequencies
+        Cut-off frequencies in Hz
     nfilt : :obj:`int`
         Size of filters
     dt : :obj:`float`
-        Time sampling
+        Time sampling in s
     plotflag : :obj:`bool`, Optional
         Plot flag (if ``True`` the frequency response of the filters will be visualized
 
@@ -112,7 +112,7 @@ class Filter():
         """
         inppad = np.pad(inp, (pad, pad))
         itmax = np.argmax(np.abs(inppad))
-        it0 = np.where(np.abs(inppad[:itmax]) < thresh * inppad[itmax])[0][-1]
+        it0 = np.where(np.abs(inppad[:itmax]) < thresh * np.abs(inppad[itmax]))[0][-1]
         for ifilt in range(len(self.filters)):
             inpfilt = apply_filter(self.filters[ifilt], inppad)
             inpfiltenv = np.abs(hilbert(inpfilt))
